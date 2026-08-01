@@ -18,6 +18,7 @@
   const toast = document.getElementById('toast');
   const btnStartRound = document.getElementById('btn-start-round');
   const btnNextPlay = document.getElementById('btn-next-play');
+  const btnSkip = document.getElementById('btn-skip');
   const btnBack = document.getElementById('btn-back');
 
   // === 配置 ===
@@ -286,6 +287,30 @@
     showPlayState();
     updateProgress();
     CurrentGameStore.save(engine.toJSON());
+  });
+
+  btnSkip.addEventListener('click', () => {
+    if (!isWaitingForPlacement) return;
+    const result = engine.skip();
+    if (!result.success) {
+      showToast('⚠ ' + result.error);
+      return;
+    }
+    CurrentGameStore.save(engine.toJSON());
+    updateProgress();
+    isWaitingForPlacement = false;
+    updateSlotStates();
+    if (engine.isComplete()) {
+      setTimeout(() => {
+        showCompleteState();
+        updateProgress();
+      }, 400);
+    } else {
+      setTimeout(() => {
+        showPlayState();
+        updateProgress();
+      }, 400);
+    }
   });
 
   btnNextPlay.addEventListener('click', () => {

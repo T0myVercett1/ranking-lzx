@@ -85,6 +85,18 @@ class GameEngine {
     return { success: true, playName };
   }
 
+  /**
+   * 跳过当前剧目（不计入排名，直接进入下一部）
+   * @returns {{ success: boolean, error?: string }}
+   */
+  skip() {
+    if (this.currentIndex >= this.poolSize) {
+      return { success: false, error: '所有剧目已处理完毕' };
+    }
+    this.currentIndex++;
+    return { success: true };
+  }
+
   /** 游戏是否完成 */
   isComplete() {
     return this.currentIndex >= this.poolSize;
@@ -112,13 +124,15 @@ class GameEngine {
       .map(s => ({ rank: s.rank, playName: s.playName }));
   }
 
-  /** 获取完整排名结果 */
+  /** 获取完整排名结果（跳过的不计入） */
   getResult() {
     if (!this.isComplete()) return null;
-    return this.rankings.map(r => ({
-      rank: r.rank,
-      playName: r.playName
-    }));
+    return this.rankings
+      .filter(r => r.playName !== null)
+      .map(r => ({
+        rank: r.rank,
+        playName: r.playName
+      }));
   }
 
   /** 序列化 */
