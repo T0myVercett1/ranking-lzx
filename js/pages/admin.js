@@ -8,12 +8,13 @@
   const formError = document.getElementById('form-error');
   const btnSave = document.getElementById('btn-save');
   const btnReset = document.getElementById('btn-reset');
+  const btnAdd = document.getElementById('btn-add');
   const toast = document.getElementById('toast');
   const modalOverlay = document.getElementById('modal-confirm');
   const modalCancel = document.getElementById('modal-cancel');
   const modalConfirmBtn = document.getElementById('modal-confirm-btn');
 
-  // === Toast 提示 ===
+  // === Toast ===
   let toastTimer = null;
   function showToast(message) {
     if (toastTimer) clearTimeout(toastTimer);
@@ -32,31 +33,67 @@
     modalOverlay.classList.remove('modal-overlay--visible');
   }
 
-  // === 渲染输入框 ===
+  // === 创建一行输入 ===
+  function createInputRow(playName, index) {
+    const row = document.createElement('div');
+    row.className = 'play-input-row';
+
+    const numberEl = document.createElement('span');
+    numberEl.className = 'play-input-row__number';
+    numberEl.textContent = index + 1;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'form-input';
+    input.value = playName;
+    input.placeholder = 'English——中文';
+    input.dataset.index = index;
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn btn--small btn--accent';
+    delBtn.textContent = '✕';
+    delBtn.title = '删除此剧目';
+    delBtn.style.cssText = 'padding:0.3rem 0.6rem;font-size:0.85rem;flex-shrink:0;';
+    delBtn.addEventListener('click', () => {
+      row.remove();
+      renumber();
+    });
+
+    row.appendChild(numberEl);
+    row.appendChild(input);
+    row.appendChild(delBtn);
+    return row;
+  }
+
+  // === 重新编号 ===
+  function renumber() {
+    const rows = playInputsContainer.querySelectorAll('.play-input-row');
+    rows.forEach((row, i) => {
+      row.querySelector('.play-input-row__number').textContent = i + 1;
+      row.querySelector('input').dataset.index = i;
+    });
+  }
+
+  // === 渲染所有输入框 ===
   function renderInputs() {
     const plays = PlayPoolStore.getAll();
     playInputsContainer.innerHTML = '';
 
     plays.forEach((playName, index) => {
-      const row = document.createElement('div');
-      row.className = 'play-input-row';
-
-      const numberEl = document.createElement('span');
-      numberEl.className = 'play-input-row__number';
-      numberEl.textContent = index + 1;
-
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'form-input';
-      input.value = playName;
-      input.placeholder = `第 ${index + 1} 部剧目`;
-      input.dataset.index = index;
-
-      row.appendChild(numberEl);
-      row.appendChild(input);
-      playInputsContainer.appendChild(row);
+      playInputsContainer.appendChild(createInputRow(playName, index));
     });
 
+    formError.style.display = 'none';
+  }
+
+  // === 添加剧目 ===
+  function handleAdd() {
+    const currentCount = playInputsContainer.querySelectorAll('.play-input-row').length;
+    const row = createInputRow('', currentCount);
+    playInputsContainer.appendChild(row);
+    // 聚焦新输入框
+    const newInput = row.querySelector('input');
+    newInput.focus();
     formError.style.display = 'none';
   }
 
@@ -77,25 +114,23 @@
       return;
     }
 
-    // 去除首尾空格后保存
     PlayPoolStore.save(plays);
     formError.style.display = 'none';
-    showToast('✅ 剧目池已保存！下一局游戏将使用新数据');
+    showToast(`✅ 已保存 ${plays.length} 部剧目！下一局游戏将使用新数据`);
   }
 
   // === 重置 ===
   function handleReset() {
-    const result = PlayPoolStore.reset();
-    showToast('✅ 已恢复默认剧目池');
-
-    // 重新渲染（防止数量变化）
+    PlayPoolStore.reset();
     renderInputs();
+    showToast(`✅ 已恢复默认 ${PlayPoolStore.DEFAULTS.length} 部剧目`);
     formError.style.display = 'none';
   }
 
   // === 事件绑定 ===
   btnSave.addEventListener('click', handleSave);
   btnReset.addEventListener('click', showModal);
+  btnAdd.addEventListener('click', handleAdd);
   modalCancel.addEventListener('click', hideModal);
   modalConfirmBtn.addEventListener('click', () => {
     handleReset();

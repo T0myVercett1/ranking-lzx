@@ -15,6 +15,8 @@
   const roundTotal = document.getElementById('round-total');
   const footerPlaced = document.getElementById('footer-placed');
   const footerTotal = document.getElementById('footer-total');
+  const poolCount = document.getElementById('pool-count');
+  const slotCountEl = document.getElementById('slot-count');
   const toast = document.getElementById('toast');
   const btnStartRound = document.getElementById('btn-start-round');
   const btnNextPlay = document.getElementById('btn-next-play');
@@ -69,11 +71,15 @@
       }
     }
 
-    // 如果没有恢复，创建新游戏 → 使用全池，10个排名槽位
+    // 如果没有恢复，创建新游戏 → 使用全池
     if (!engine) {
       engine = new GameEngine(pool, { slotCount: SLOT_COUNT });
       CurrentGameStore.clear();
     }
+
+    // 更新初始提示中的数字
+    if (poolCount) poolCount.textContent = pool.length;
+    if (slotCountEl) slotCountEl.textContent = SLOT_COUNT;
 
     // 渲染排名槽位
     renderRankSlots();

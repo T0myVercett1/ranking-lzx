@@ -27,8 +27,8 @@
         <!-- 说明 -->
         <div class="card" style="margin-bottom: var(--space-xl);">
           <p style="margin-bottom: 0;">
-            📝 编辑以下剧目列表。不能有空名、不能重复，最少2部。
-            修改后点击"保存"生效，下一局游戏将使用新剧目池。
+            📝 自由增删剧目。格式建议：<code>English——中文</code>，如 <em>Macbeth——麦克白</em>。<br>
+            不能有空名、不能重复，最少 2 部。保存后下一局生效。
           </p>
         </div>
 
@@ -36,6 +36,10 @@
         <div class="card card--accent" id="pool-editor">
           <div class="form-error" id="form-error" style="display:none; margin-bottom: var(--space-md);"></div>
           <div id="play-inputs"></div>
+
+          <button type="button" class="btn btn--secondary btn--small" id="btn-add" style="margin-top: var(--space-sm);">
+            ➕ 添加一部剧目
+          </button>
 
           <div class="admin-actions">
             <button type="button" class="btn btn--primary" id="btn-save">💾 保存剧目池</button>
