@@ -256,11 +256,13 @@
         updateProgress();
       }, 500);
     } else {
-      // 显示"下一部"按钮
-      revealPlay.style.display = 'none';
-      nextPlayArea.style.display = 'block';
+      // 自动揭示下一部（无需玩家手动点击）
       isWaitingForPlacement = false;
       updateSlotStates();
+      setTimeout(() => {
+        showPlayState();
+        updateProgress();
+      }, 600);
     }
   }
 
