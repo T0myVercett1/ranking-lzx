@@ -20,6 +20,9 @@
   const btnNextPlay = document.getElementById('btn-next-play');
   const btnBack = document.getElementById('btn-back');
 
+  // === 配置 ===
+  const SELECT_COUNT = 10; // 每局从池中随机抽取的数量
+
   // === 状态 ===
   let engine = null;
   let isWaitingForPlacement = false; // 是否正在等待玩家选择排名
@@ -59,9 +62,17 @@
       }
     }
 
-    // 如果没有恢复，创建新游戏
+    // 如果没有恢复，创建新游戏 → 从池中随机抽取 SELECT_COUNT 部
     if (!engine) {
-      engine = new GameEngine(pool);
+      const selectCount = Math.min(SELECT_COUNT, pool.length);
+      // Fisher-Yates 洗牌后取前 selectCount 部
+      const shuffled = [...pool];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      const selected = shuffled.slice(0, selectCount);
+      engine = new GameEngine(selected);
       CurrentGameStore.clear();
     }
 
