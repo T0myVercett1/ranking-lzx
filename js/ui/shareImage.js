@@ -149,38 +149,44 @@ const ShareImage = {
     ctx.textAlign = 'center';
     ctx.fillText('❦', WIDTH / 2, bottomY + 24);
 
-    // === QR码区域 ===
+    // === QR码区域（通过API生成，不依赖外部JS库） ===
     const qrSectionY = bottomY + 45;
+    const qrSize = 110;
 
-    // 尝试生成QR码
+    // 默认使用线上地址
+    const qrUrl = siteUrl || 'https://t0myvercett1.github.io/ranking-lzx/';
+    const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=' + qrSize + 'x' + qrSize + '&data=' + encodeURIComponent(qrUrl);
+
     let qrGenerated = false;
-    if (typeof QRCode !== 'undefined' && siteUrl) {
-      try {
-        const qrSize = 100;
-        const qrCanvas = await this._generateQRCode(siteUrl, qrSize);
-        if (qrCanvas) {
-          const qrX = WIDTH / 2 - qrSize / 2;
-          ctx.drawImage(qrCanvas, qrX, qrSectionY + 8, qrSize, qrSize);
-          qrGenerated = true;
+    try {
+      const qrImg = await this._loadImage(qrApiUrl);
+      if (qrImg) {
+        const qrX = WIDTH / 2 - qrSize / 2;
+        // 白色背景
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(qrX - 4, qrSectionY + 4, qrSize + 8, qrSize + 8);
+        // 绘制QR码
+        ctx.drawImage(qrImg, qrX, qrSectionY + 8, qrSize, qrSize);
+        qrGenerated = true;
 
-          // 扫码提示
-          ctx.fillStyle = '#5c3a28';
-          ctx.font = '13px "Noto Serif SC", "SimSun", "宋体", serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('扫码开始你的莎士比亚盲选之旅', WIDTH / 2, qrSectionY + qrSize + 24);
-        }
-      } catch (e) {
-        console.warn('QR码生成失败:', e);
+        // 扫码提示
+        ctx.fillStyle = '#5c3a28';
+        ctx.font = '13px "Noto Serif SC", "SimSun", "宋体", serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('扫码开始你的莎士比亚盲选之旅', WIDTH / 2, qrSectionY + qrSize + 24);
       }
+    } catch (e) {
+      console.warn('QR码加载失败:', e);
     }
 
     if (!qrGenerated) {
-      // 备用：不显示QR，改用文字引导
+      // 备用：文字引导
       ctx.fillStyle = '#8b7355';
       ctx.font = '14px "Noto Serif SC", "SimSun", "宋体", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('莎士比亚戏剧 · 盲选排名游戏', WIDTH / 2, qrSectionY + 25);
-      ctx.fillText('与好友一起挑战你的戏剧品味吧！', WIDTH / 2, qrSectionY + 50);
+      ctx.fillText('来玩莎士比亚盲选排名游戏吧！', WIDTH / 2, qrSectionY + 25);
+      ctx.font = '11px monospace';
+      ctx.fillText(qrUrl, WIDTH / 2, qrSectionY + 50);
     }
 
     // === 底部 ===
@@ -209,47 +215,17 @@ const ShareImage = {
   },
 
   /**
-   * 生成二维码 Canvas
-   * @param {string} text
-   * @param {number} size
-   * @returns {Promise<HTMLCanvasElement|null>}
+   * 加载远程图片
+   * @param {string} url
+   * @returns {Promise<HTMLImageElement|null>}
    */
-  _generateQRCode(text, size) {
-    return new Promise((resolve) => {
-      try {
-        const container = document.createElement('div');
-        container.style.position = 'absolute';
-        container.style.left = '-9999px';
-        document.body.appendChild(container);
-
-        const qr = new QRCode(container, {
-          text: text,
-          width: size,
-          height: size,
-          colorDark: '#2c1810',
-          colorLight: '#f4e4c1',
-          correctLevel: QRCode.CorrectLevel.M
-        });
-
-        // 等渲染完成
-        setTimeout(() => {
-          const qrCanvas = container.querySelector('canvas');
-          if (qrCanvas) {
-            // 克隆 canvas 避免引用被移除的元素
-            const clone = document.createElement('canvas');
-            clone.width = qrCanvas.width;
-            clone.height = qrCanvas.height;
-            clone.getContext('2d').drawImage(qrCanvas, 0, 0);
-            document.body.removeChild(container);
-            resolve(clone);
-          } else {
-            document.body.removeChild(container);
-            resolve(null);
-          }
-        }, 500);
-      } catch (e) {
-        resolve(null);
-      }
+  _loadImage(url) {
+    return new Promise(function (resolve) {
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { resolve(null); };
+      img.src = url;
     });
   }
 };
