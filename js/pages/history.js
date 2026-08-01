@@ -96,7 +96,7 @@
 
         const nameEl = document.createElement('span');
         nameEl.className = 'history-detail-row__name';
-        nameEl.textContent = r.playName;
+        nameEl.innerHTML = formatPlayNameHTML(r.playName);
 
         row.appendChild(rankEl);
         row.appendChild(nameEl);

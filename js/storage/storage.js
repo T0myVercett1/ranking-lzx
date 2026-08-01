@@ -62,18 +62,25 @@ const Storage = {
 const PlayPoolStore = {
   KEY: 'bard_play_pool',
 
-  /** 默认10部莎士比亚剧目 */
+  /** 默认17部莎士比亚剧目（双语格式：English——中文） */
   DEFAULTS: [
-    '麦克白',
-    '暴风雨',
-    '爱的徒劳',
-    '李尔王',
-    '哈姆雷特',
-    '仲夏夜之梦',
-    '安东尼与克莉奥特佩拉',
-    '皆大欢喜',
-    '第十二夜',
-    '威尼斯商人'
+    'Macbeth——麦克白',
+    'The Tempest——暴风雨',
+    'Love\'s Labour\'s Lost——爱的徒劳',
+    'King Lear——李尔王',
+    'Hamlet——哈姆雷特',
+    'A Midsummer Night\'s Dream——仲夏夜之梦',
+    'Antony and Cleopatra——安东尼与克莉奥特佩拉',
+    'As You Like It——皆大欢喜',
+    'Twelfth Night——第十二夜',
+    'The Merchant of Venice——威尼斯商人',
+    'Othello——奥赛罗',
+    'The Taming of the Shrew——驯悍记',
+    'Romeo and Juliet——罗密欧与朱丽叶',
+    'The Trojan Women——特洛伊女人',
+    'Much Ado About Nothing——无事生非',
+    'Richard III——理查三世',
+    'Henry VIII——亨利八世'
   ],
 
   /** 获取当前剧目池 */
@@ -104,8 +111,11 @@ const PlayPoolStore = {
       return { valid: false, errors: ['剧目池格式错误'] };
     }
 
-    if (plays.length !== 10) {
-      errors.push(`剧目池必须有恰好10部剧，当前有 ${plays.length} 部`);
+    if (plays.length < 2) {
+      errors.push(`剧目池至少需要2部剧，当前只有 ${plays.length} 部`);
+    }
+    if (plays.length > 50) {
+      errors.push(`剧目池最多50部剧，当前有 ${plays.length} 部`);
     }
 
     // 检查空值

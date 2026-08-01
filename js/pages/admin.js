@@ -88,11 +88,8 @@
     const result = PlayPoolStore.reset();
     showToast('✅ 已恢复默认剧目池');
 
-    // 更新输入框
-    const inputs = playInputsContainer.querySelectorAll('input');
-    inputs.forEach((input, i) => {
-      input.value = result[i];
-    });
+    // 重新渲染（防止数量变化）
+    renderInputs();
     formError.style.display = 'none';
   }
 

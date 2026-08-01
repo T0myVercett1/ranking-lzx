@@ -9,8 +9,10 @@ const ShareImage = {
    */
   async generate(rankings, siteUrl) {
     const WIDTH = 600;
-    const HEIGHT = 850;
     const PADDING = 35;
+    const LINE_SPACING = 42;
+    // 动态高度：顶部(490) + 排名行数 × 行距
+    const HEIGHT = 490 + rankings.length * LINE_SPACING;
 
     const canvas = document.createElement('canvas');
     canvas.width = WIDTH;
@@ -63,10 +65,9 @@ const ShareImage = {
 
     // === 排名列表 ===
     const listStartY = dividerY + 40;
-    const lineHeight = 44;
 
     rankings.forEach((item, index) => {
-      const y = listStartY + index * lineHeight;
+      const y = listStartY + index * LINE_SPACING;
 
       // 排名奖牌
       const medalColors = ['#b8860b', '#a0a0a0', '#cd853f']; // 金银铜
@@ -88,19 +89,37 @@ const ShareImage = {
       ctx.textAlign = 'center';
       ctx.fillText(String(item.rank), cx, cy + 5);
 
-      // 剧目名称
-      ctx.fillStyle = '#2c1810';
-      ctx.font = '20px "Noto Serif SC", "SimSun", "宋体", serif';
-      ctx.textAlign = 'left';
-      const name = item.playName;
-      // 如果剧名太长，缩小字号
-      if (name.length > 10) {
-        ctx.font = '17px "Noto Serif SC", "SimSun", "宋体", serif';
+      // 剧目名称（双语渲染：英文花体 + 中文衬线）
+      const playName = item.playName;
+      const nameX = cx + radius + 18;
+      const nameY = y + 6;
+
+      if (playName && playName.includes('——')) {
+        const idx = playName.indexOf('——');
+        const enPart = playName.slice(0, idx);
+        const zhPart = '——' + playName.slice(idx + 2);
+
+        // 英文花体部分
+        ctx.fillStyle = '#2c1810';
+        ctx.font = 'italic 16px "Tangerine", "Cormorant Garamond", "Georgia", cursive, serif';
+        ctx.textAlign = 'left';
+        const enWidth = ctx.measureText(enPart).width;
+        ctx.fillText(enPart, nameX, nameY);
+
+        // 中文部分（稍小字号）
+        ctx.fillStyle = '#3a2215';
+        ctx.font = '15px "Noto Serif SC", "SimSun", "宋体", serif';
+        ctx.fillText(zhPart, nameX + enWidth + 4, nameY + 1);
+      } else {
+        // 非双语格式，正常绘制
+        ctx.fillStyle = '#2c1810';
+        ctx.font = '18px "Noto Serif SC", "SimSun", "宋体", serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(playName, nameX, nameY);
       }
-      ctx.fillText(name, cx + radius + 18, y + 6);
 
       // 虚线分隔
-      if (index < 9) {
+      if (index < rankings.length - 1) {
         ctx.strokeStyle = 'rgba(139, 115, 85, 0.25)';
         ctx.lineWidth = 0.5;
         ctx.setLineDash([4, 4]);
@@ -113,7 +132,7 @@ const ShareImage = {
     });
 
     // === 底部区域 ===
-    const bottomY = listStartY + 10 * lineHeight + 25;
+    const bottomY = listStartY + rankings.length * LINE_SPACING + 25;
 
     // 分隔线
     ctx.strokeStyle = '#b8860b';

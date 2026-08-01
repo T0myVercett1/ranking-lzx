@@ -17,7 +17,7 @@
     <header class="page-header">
       <div class="container">
         <a href="index.html" class="back-link" id="btn-back">← 返回首页</a>
-        <p class="subtitle">第 <span id="round-num">1</span> / 10 部</p>
+        <p class="subtitle">第 <span id="round-num">1</span> / <span id="round-total">?</span> 部</p>
       </div>
     </header>
 
@@ -75,12 +75,13 @@
     <footer class="page-footer">
       <div class="container">
         <p class="text-center" style="font-size: var(--text-xs);">
-          已放置 <span id="footer-placed">0</span> / 10 部
+          已放置 <span id="footer-placed">0</span> / <span id="footer-total">?</span> 部
         </p>
       </div>
     </footer>
   </div>
 
+  <script src="js/utils.js"></script>
   <script src="js/storage/storage.js"></script>
   <script src="js/core/gameEngine.js"></script>
   <script src="js/pages/game.js"></script>

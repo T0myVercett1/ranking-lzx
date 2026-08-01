@@ -73,7 +73,7 @@
 
       const nameEl = document.createElement('span');
       nameEl.className = 'result-item__name';
-      nameEl.textContent = item.playName;
+      nameEl.innerHTML = formatPlayNameHTML(item.playName);
 
       row.appendChild(rankEl);
       row.appendChild(nameEl);

@@ -1,6 +1,21 @@
 /* === 字体与排版 === */
-/* 英文字体（标题用）+ 中文字体（宋体/衬线）*/
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+/* 英文字体（标题用）+ 中文字体（宋体/衬线）+ 花体英文 */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Serif+SC:wght@400;600;700&family=Tangerine:wght@400;700&display=swap');
+
+/* 剧目英文名 — 花体/斜体 */
+.play-name-en {
+  font-family: 'Tangerine', 'Cormorant Garamond', 'Georgia', 'Segoe Script', 'Gabriola', cursive;
+  font-style: italic;
+  font-size: 1.15em;
+  letter-spacing: 0.03em;
+  color: var(--color-ink);
+}
+
+/* 剧目中文名 — 衬线体 */
+.play-name-zh {
+  font-family: var(--font-display);
+  color: var(--color-ink-light);
+}
 
 body {
   font-family: var(--font-body);

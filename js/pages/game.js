@@ -12,7 +12,9 @@
   const nextPlayArea = document.getElementById('next-play-area');
   const progressFill = document.getElementById('progress-fill');
   const roundNum = document.getElementById('round-num');
+  const roundTotal = document.getElementById('round-total');
   const footerPlaced = document.getElementById('footer-placed');
+  const footerTotal = document.getElementById('footer-total');
   const toast = document.getElementById('toast');
   const btnStartRound = document.getElementById('btn-start-round');
   const btnNextPlay = document.getElementById('btn-next-play');
@@ -96,7 +98,7 @@
       nameEl.className = 'rank-slot__name';
 
       if (slot.playName) {
-        nameEl.textContent = slot.playName;
+        nameEl.innerHTML = formatPlayNameHTML(slot.playName);
         slotEl.classList.add('rank-slot--filled');
       } else {
         nameEl.textContent = '—— 等待选择 ——';
@@ -127,7 +129,7 @@
       if (slotData.playName) {
         // 已填充
         slotEl.classList.add('rank-slot--filled');
-        nameEl.textContent = slotData.playName;
+        nameEl.innerHTML = formatPlayNameHTML(slotData.playName);
         nameEl.classList.remove('rank-slot__name--empty');
       } else if (isWaitingForPlacement) {
         // 可点击选择
@@ -168,7 +170,7 @@
       currentPlayNameEl.classList.remove('fade-in');
       void currentPlayNameEl.offsetWidth; // 强制回流
       currentPlayNameEl.classList.add('fade-in');
-      currentPlayNameEl.textContent = playName;
+      currentPlayNameEl.innerHTML = formatPlayNameHTML(playName);
     }
 
     nextPlayArea.style.display = 'none';
@@ -216,7 +218,7 @@
     if (filledSlotEl) {
       const nameEl = filledSlotEl.querySelector('.rank-slot__name');
       filledSlotEl.className = 'rank-slot rank-slot--filled rank-slot--just-filled';
-      nameEl.textContent = playName;
+      nameEl.innerHTML = formatPlayNameHTML(playName);
       nameEl.classList.remove('rank-slot__name--empty');
     }
 
@@ -250,11 +252,13 @@
     const { placed, total } = engine.getProgress();
     const pct = Math.round((placed / total) * 100);
     progressFill.style.width = pct + '%';
-    roundNum.textContent = Math.min(placed + 1, 10);
+    roundTotal.textContent = total;
+    roundNum.textContent = Math.min(placed + 1, total);
     footerPlaced.textContent = placed;
+    footerTotal.textContent = total;
 
     if (engine.isComplete()) {
-      roundNum.textContent = '10';
+      roundNum.textContent = total;
     }
   }
 
