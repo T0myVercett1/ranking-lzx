@@ -22,7 +22,7 @@
   const btnBack = document.getElementById('btn-back');
 
   // === 配置 ===
-  const SELECT_COUNT = 10; // 每局从池中随机抽取的数量
+  const SLOT_COUNT = 10; // 排名槽位数量
 
   // === 状态 ===
   let engine = null;
@@ -69,17 +69,9 @@
       }
     }
 
-    // 如果没有恢复，创建新游戏 → 从池中随机抽取 SELECT_COUNT 部
+    // 如果没有恢复，创建新游戏 → 使用全池，10个排名槽位
     if (!engine) {
-      const selectCount = Math.min(SELECT_COUNT, pool.length);
-      // Fisher-Yates 洗牌后取前 selectCount 部
-      const shuffled = [...pool];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      const selected = shuffled.slice(0, selectCount);
-      engine = new GameEngine(selected);
+      engine = new GameEngine(pool, { slotCount: SLOT_COUNT });
       CurrentGameStore.clear();
     }
 
@@ -269,13 +261,13 @@
 
   // === 更新进度 ===
   function updateProgress() {
-    const { placed, total } = engine.getProgress();
-    const pct = Math.round((placed / total) * 100);
+    const { placed, skipped, total, slotCount } = engine.getProgress();
+    const pct = Math.round(((placed + skipped) / total) * 100);
     progressFill.style.width = pct + '%';
     roundTotal.textContent = total;
-    roundNum.textContent = Math.min(placed + 1, total);
+    roundNum.textContent = Math.min(placed + skipped + 1, total);
     footerPlaced.textContent = placed;
-    footerTotal.textContent = total;
+    footerTotal.textContent = slotCount;
 
     if (engine.isComplete()) {
       roundNum.textContent = total;
