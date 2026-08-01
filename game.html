@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>游戏进行中 — The Bard's Blind Ranking</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/vintage.css">
+  <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="page-header">
+      <div class="container">
+        <a href="index.html" class="back-link" id="btn-back">← 返回首页</a>
+        <p class="subtitle">第 <span id="round-num">1</span> / 10 部</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="container">
+        <!-- 进度条 -->
+        <div class="progress-bar">
+          <div class="progress-bar__fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <!-- 剧目揭示区 -->
+        <div class="reveal-area card card--accent" id="reveal-area">
+          <!-- 初始状态 -->
+          <div id="reveal-initial" class="text-center">
+            <p class="reveal-prompt">准备好开始你的<br>莎士比亚盲选排名之旅了吗？</p>
+            <button class="btn btn--primary" id="btn-start-round">
+              ✨ 揭示第一部剧目
+            </button>
+          </div>
+
+          <!-- 剧目揭示状态 -->
+          <div id="reveal-play" style="display:none;">
+            <p class="reveal-label">当前剧目</p>
+            <h2 class="reveal-play-name fade-in" id="current-play-name"></h2>
+            <p class="reveal-instruction">请从下方选择一个空位放置它</p>
+          </div>
+
+          <!-- 游戏完成状态 -->
+          <div id="reveal-complete" style="display:none;" class="text-center">
+            <h2>🎉 全部排完！</h2>
+            <p>你已完成 10 部莎士比亚剧目的盲选排名</p>
+            <a href="result.html" class="btn btn--accent" id="btn-view-result">
+              📜 查看我的排名
+            </a>
+          </div>
+        </div>
+
+        <!-- 排名槽位 -->
+        <div class="rank-slots" id="rank-slots">
+          <!-- JS 动态生成 10 个槽位 -->
+        </div>
+
+        <!-- 下一部按钮 -->
+        <div class="next-play-area" id="next-play-area" style="display:none;">
+          <button class="btn btn--primary btn--full" id="btn-next-play">
+            ▶ 揭示下一部剧目
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <footer class="page-footer">
+      <div class="container">
+        <p class="text-center" style="font-size: var(--text-xs);">
+          已放置 <span id="footer-placed">0</span> / 10 部
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/storage/storage.js"></script>
+  <script src="js/core/gameEngine.js"></script>
+  <script src="js/pages/game.js"></script>
+</body>
+</html>

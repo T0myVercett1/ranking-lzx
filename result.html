@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>我的排名 — The Bard's Blind Ranking</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/vintage.css">
+  <link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="page-header">
+      <div class="container">
+        <h1>📜 我的排名</h1>
+        <p class="subtitle">莎士比亚戏剧个人喜好榜</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="container">
+        <!-- 排名列表 -->
+        <div class="card card--accent" id="result-card">
+          <div id="result-list"></div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="result-actions">
+          <button class="btn btn--primary btn--full" id="btn-share">
+            📸 生成分享图片
+          </button>
+          <button class="btn btn--secondary btn--full" id="btn-copy">
+            📋 复制排名文本
+          </button>
+          <a href="game.html" class="btn btn--accent btn--full">
+            🔄 再来一局
+          </a>
+          <a href="history.html" class="btn btn--secondary btn--full">
+            📜 查看历史记录
+          </a>
+          <a href="index.html" class="btn btn--secondary btn--full">
+            🏠 返回首页
+          </a>
+        </div>
+
+        <!-- 分享图片弹窗 -->
+        <div class="modal-overlay" id="share-modal">
+          <div class="modal" style="max-width: 90%;">
+            <h3 class="modal__title">你的排名卡片</h3>
+            <p class="modal__body">长按图片保存到相册，分享给朋友！</p>
+            <div id="share-image-container"></div>
+            <div class="modal__actions" style="margin-top: var(--space-lg);">
+              <button class="btn btn--secondary" id="share-close">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <footer class="page-footer">
+      <div class="container">
+        <p class="text-center" style="font-size: var(--text-xs);">「世界是一个舞台，所有的男男女女不过是一些演员」</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- QR码生成库（异步加载，不阻塞页面） -->
+  <script>
+    // 异步加载 QRCode 库
+    (function() {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      script.onerror = function() {
+        console.warn('QRCode 库加载失败（CDN不可用），分享图片将不显示二维码');
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
+  <script src="js/storage/storage.js"></script>
+  <script src="js/core/gameEngine.js"></script>
+  <script src="js/ui/shareImage.js"></script>
+  <script src="js/pages/result.js"></script>
+</body>
+</html>

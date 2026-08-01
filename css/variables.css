@@ -1,0 +1,54 @@
+/* === CSS 变量 — 全局设计令牌 === */
+:root {
+  /* === 欧式复古配色 === */
+  --color-parchment:        #f4e4c1;   /* 旧纸背景 */
+  --color-parchment-dark:   #e8d5a3;   /* 深旧纸 */
+  --color-parchment-light:  #faf3e3;   /* 浅旧纸 */
+  --color-ink:              #2c1810;   /* 墨色正文 */
+  --color-ink-light:        #5c3a28;   /* 浅墨 */
+  --color-ink-muted:        #8b7355;   /* 淡墨 */
+  --color-accent:           #8b0000;   /* 深红 */
+  --color-accent-gold:      #b8860b;   /* 暗金 */
+  --color-border:           #8b7355;   /* 边框 */
+  --color-success:          #2d5a27;   /* 墨绿 */
+  --color-danger:           #8b0000;   /* 深红 */
+
+  /* === 排名槽位颜色 === */
+  --color-slot-empty:       #d4c5a9;
+  --color-slot-empty-hover: #c9b896;
+  --color-slot-filled:      #c4a46c;
+  --color-slot-filled-text: #2c1810;
+
+  /* === 间距 === */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+
+  /* === 圆角 === */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  /* === 阴影 === */
+  --shadow-card: 0 2px 8px rgba(44, 24, 16, 0.15);
+  --shadow-button: 0 1px 4px rgba(44, 24, 16, 0.2);
+
+  /* === 字体 === */
+  --font-display: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', 'SimSun', '宋体', Georgia, serif;
+  --font-body:    'Noto Serif SC', 'Songti SC', 'SimSun', '宋体', Georgia, 'Times New Roman', serif;
+
+  /* === 字号 === */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  2.25rem;
+  --text-3xl:  3rem;
+
+  /* === 布局 === */
+  --max-width: 640px;
+}

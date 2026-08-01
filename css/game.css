@@ -1,0 +1,153 @@
+/* === 游戏页样式 === */
+
+/* 进度条 */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--color-slot-empty);
+  border-radius: 3px;
+  margin-bottom: var(--space-xl);
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: var(--color-accent-gold);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* 剧目揭示区 */
+.reveal-area {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal-prompt {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-ink-light);
+  margin-bottom: var(--space-xl);
+  line-height: 1.7;
+}
+
+.reveal-label {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.reveal-play-name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--color-ink);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.reveal-instruction {
+  color: var(--color-ink-light);
+  font-style: italic;
+}
+
+/* 排名槽位列表 */
+.rank-slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+/* 单个排名槽位 */
+.rank-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-slot-empty);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  cursor: default;
+  min-height: 3.5rem;
+}
+
+.rank-slot--available {
+  cursor: pointer;
+  border-style: dashed;
+}
+
+.rank-slot--available:hover {
+  background: var(--color-slot-empty-hover);
+  border-color: var(--color-accent-gold);
+  border-style: solid;
+  transform: translateX(4px);
+}
+
+.rank-slot--filled {
+  background: var(--color-slot-filled);
+  border-style: solid;
+  border-color: var(--color-accent-gold);
+  cursor: default;
+}
+
+.rank-slot--just-filled {
+  animation: slotPulse 0.6s ease;
+}
+
+@keyframes slotPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); background: var(--color-accent-gold); }
+  100% { transform: scale(1); }
+}
+
+.rank-slot--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rank-slot__number {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+/* 前三名特殊样式 */
+.rank-slot:nth-child(1) .rank-slot__number { color: var(--color-accent-gold); }
+.rank-slot:nth-child(2) .rank-slot__number { color: var(--color-ink-light); }
+.rank-slot:nth-child(3) .rank-slot__number { color: #8b6914; }
+
+.rank-slot__name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+}
+
+.rank-slot__name--empty {
+  color: var(--color-ink-muted);
+  font-style: italic;
+  font-size: var(--text-base);
+}
+
+/* 下一部按钮区 */
+.next-play-area {
+  margin-bottom: var(--space-xl);
+}

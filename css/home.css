@@ -1,0 +1,42 @@
+/* === 首页样式 === */
+
+/* 规则列表 */
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.rule-item__number {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-ink);
+  color: var(--color-parchment-light);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+.rule-item p {
+  margin-bottom: 0;
+  padding-top: 0.25rem;
+}
+
+/* 首页按钮区 */
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+}

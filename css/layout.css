@@ -1,0 +1,79 @@
+/* === 通用布局 === */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+
+.page-header h1 {
+  margin-bottom: var(--space-sm);
+}
+
+.page-header .subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--color-ink-muted);
+  font-size: var(--text-lg);
+}
+
+.page-main {
+  flex: 1;
+  padding-bottom: var(--space-2xl);
+}
+
+.page-footer {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+/* 卡片 */
+.card {
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-lg);
+}
+
+.card--accent {
+  border-color: var(--color-accent-gold);
+  border-width: 2px;
+  border-style: double;
+}
+
+/* 居中容器 */
+.text-center {
+  text-align: center;
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-lg);
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--color-ink);
+}

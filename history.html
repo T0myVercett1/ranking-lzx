@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>历史记录 — The Bard's Blind Ranking</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/vintage.css">
+  <link rel="stylesheet" href="css/history.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="page-header">
+      <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <h1>📋 历史记录</h1>
+        <p class="subtitle">过往排名回顾</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="container">
+        <!-- 空状态 -->
+        <div id="history-empty" class="card text-center" style="display:none;">
+          <p style="margin-bottom: var(--space-lg); font-size: var(--text-lg);">🎭 还没有游戏记录</p>
+          <p>快去开始你的第一局莎士比亚盲选排名吧！</p>
+          <a href="game.html" class="btn btn--primary" style="margin-top: var(--space-lg);">开始新游戏</a>
+        </div>
+
+        <!-- 历史列表 -->
+        <div id="history-list"></div>
+
+        <!-- 清空按钮 -->
+        <div id="history-actions" style="display:none; text-align: center; margin-top: var(--space-xl);">
+          <div class="vintage-divider">
+            <span class="vintage-divider__icon">❦</span>
+          </div>
+          <button class="btn btn--secondary btn--small" id="btn-clear-all">
+            🗑 清空全部历史
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- 确认弹窗 -->
+    <div class="modal-overlay" id="modal-confirm">
+      <div class="modal">
+        <h3 class="modal__title">确认清空</h3>
+        <p class="modal__body">将删除所有历史排名记录，此操作不可撤销。</p>
+        <div class="modal__actions">
+          <button class="btn btn--secondary" id="modal-cancel">取消</button>
+          <button class="btn btn--accent" id="modal-confirm-btn">确认清空</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <div class="container">
+        <p class="text-center" style="font-size: var(--text-xs);">最多保留最近 50 条记录</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/storage/storage.js"></script>
+  <script src="js/pages/history.js"></script>
+</body>
+</html>

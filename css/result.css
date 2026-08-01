@@ -1,0 +1,79 @@
+/* === 结果页样式 === */
+
+/* 排名条目 */
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item__rank {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-ink);
+  background: var(--color-parchment-dark);
+  border-radius: 50%;
+}
+
+/* 前三名高亮 */
+.result-item:nth-child(1) .result-item__rank {
+  background: var(--color-accent-gold);
+  color: white;
+  font-size: var(--text-2xl);
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.result-item:nth-child(2) .result-item__rank {
+  background: #c0c0c0;
+  color: var(--color-ink);
+}
+
+.result-item:nth-child(3) .result-item__rank {
+  background: #cd7f32;
+  color: white;
+}
+
+.result-item__name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* 操作按钮区 */
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+/* 分享图片容器 */
+#share-image-container {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+#share-image-container img,
+#share-image-container canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}

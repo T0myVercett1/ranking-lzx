@@ -1,0 +1,123 @@
+/* === 欧式复古主题样式 === */
+
+/* 羊皮纸背景纹理 */
+body {
+  background-color: var(--color-parchment);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(184, 134, 11, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(139, 0, 0, 0.03) 0%, transparent 50%);
+}
+
+/* 双线边框 — 复古框 */
+.border-vintage {
+  border: 3px double var(--color-border);
+  padding: var(--space-lg);
+}
+
+.border-vintage--gold {
+  border-color: var(--color-accent-gold);
+}
+
+/* 章节首字下沉 */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.5em;
+  line-height: 0.8;
+  padding-right: 0.15em;
+  padding-top: 0.05em;
+  color: var(--color-accent);
+}
+
+/* 复古分隔线 */
+.vintage-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+  color: var(--color-accent-gold);
+}
+
+.vintage-divider::before,
+.vintage-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.vintage-divider__icon {
+  font-size: var(--text-lg);
+}
+
+/* 装饰角标 */
+.corner-ornament {
+  position: relative;
+}
+
+.corner-ornament::before,
+.corner-ornament::after {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--color-accent-gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.corner-ornament::before {
+  content: '❧';
+  top: -0.5rem;
+  left: -0.25rem;
+}
+
+.corner-ornament::after {
+  content: '❧';
+  bottom: -0.5rem;
+  right: -0.25rem;
+  transform: rotate(180deg);
+}
+
+/* 复古纸张效果 Hover */
+.card--vintage {
+  background: var(--color-parchment-light);
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+.card--vintage:hover {
+  box-shadow:
+    0 4px 16px rgba(44, 24, 16, 0.12),
+    0 1px 3px rgba(44, 24, 16, 0.08);
+}
+
+/* 类型机文字效果 */
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 0.8s steps(30) 1;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* 淡入效果 */
+.fade-in {
+  animation: fadeIn 0.6s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

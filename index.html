@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Bard's Blind Ranking</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/vintage.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="page-header">
+      <div class="container">
+        <h1>The Bard's<br>Blind Ranking</h1>
+        <p class="subtitle">莎士比亚戏剧 · 盲选排名游戏</p>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <div class="container">
+        <!-- 游戏规则说明 -->
+        <div class="card card--accent corner-ornament">
+          <h3 style="text-align:center; margin-bottom: var(--space-lg);">📜 游戏规则</h3>
+
+          <div class="rules-list">
+            <div class="rule-item">
+              <span class="rule-item__number">1</span>
+              <p>系统将<strong>逐一随机</strong>放出 10 部莎士比亚剧目</p>
+            </div>
+            <div class="rule-item">
+              <span class="rule-item__number">2</span>
+              <p>看到剧目后，立刻决定把它放在 <strong>1~10 名</strong>中的某个空位</p>
+            </div>
+            <div class="rule-item">
+              <span class="rule-item__number">3</span>
+              <p>每个名次<strong>只能放一部</strong>，一旦选定<strong>不可更改</strong></p>
+            </div>
+            <div class="rule-item">
+              <span class="rule-item__number">4</span>
+              <p>10 部全部排完，生成你的<strong>个人喜好排行榜</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="home-actions">
+          <a href="game.html" class="btn btn--primary btn--full" id="btn-start">
+            🎭 开始新游戏
+          </a>
+          <a href="history.html" class="btn btn--secondary btn--full" id="btn-history">
+            📋 查看历史记录
+          </a>
+        </div>
+
+        <div class="vintage-divider">
+          <span class="vintage-divider__icon">❦</span>
+        </div>
+
+        <!-- 底部管理入口 -->
+        <p class="text-center">
+          <a href="admin.html" class="back-link" id="link-admin">⚙ 后台管理（编辑剧目池）</a>
+        </p>
+      </div>
+    </main>
+
+    <footer class="page-footer">
+      <div class="container">
+        <p class="text-center" style="font-size: var(--text-xs);">「生存还是毁灭，这是个问题」— 哈姆雷特</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/storage/storage.js"></script>
+  <script src="js/pages/home.js"></script>
+</body>
+</html>

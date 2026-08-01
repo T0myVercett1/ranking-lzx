@@ -1,0 +1,180 @@
+/* === 通用组件样式 === */
+
+/* === 按钮 === */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-button);
+  user-select: none;
+}
+
+.btn--primary {
+  background: var(--color-ink);
+  color: var(--color-parchment-light);
+  border: 2px solid var(--color-ink);
+}
+
+.btn--primary:hover {
+  background: var(--color-ink-light);
+  border-color: var(--color-ink-light);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border: 2px solid var(--color-border);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-ink);
+  background: var(--color-parchment-dark);
+}
+
+.btn--accent {
+  background: var(--color-accent);
+  color: var(--color-parchment-light);
+  border: 2px solid var(--color-accent);
+}
+
+.btn--accent:hover {
+  background: #a00000;
+}
+
+.btn--small {
+  padding: 0.4rem 1rem;
+  font-size: var(--text-sm);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* === 表单 === */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--color-ink);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.15);
+}
+
+.form-input::placeholder {
+  color: var(--color-ink-muted);
+  font-style: italic;
+}
+
+.form-error {
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  margin-top: var(--space-xs);
+}
+
+.form-hint {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+/* === Toast 提示 === */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-ink);
+  color: var(--color-parchment-light);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.toast--visible {
+  opacity: 1;
+}
+
+/* === 确认弹窗 === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 24, 16, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: var(--color-parchment-light);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-md);
+}
+
+.modal__body {
+  margin-bottom: var(--space-lg);
+  color: var(--color-ink-light);
+}
+
+.modal__actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+}
