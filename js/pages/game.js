@@ -40,7 +40,13 @@
 
   // === 初始化游戏 ===
   function initGame() {
-    const pool = PlayPoolStore.getAll();
+    let pool = PlayPoolStore.getAll();
+
+    // 检测旧格式数据，自动迁移
+    if (pool.length > 0 && !pool[0].includes('——')) {
+      PlayPoolStore.reset();
+      pool = PlayPoolStore.getAll();
+    }
 
     // 校验剧目池
     const validation = PlayPoolStore.validate(pool);
